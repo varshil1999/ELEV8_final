@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.SwerveModule;
 import frc.robot.Constants;
-
+import frc.robot.RobotContainer;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
@@ -146,5 +146,17 @@ public class Swerve extends SubsystemBase {
            
         }
         SmartDashboard.putNumber("tiltangle", getTilt().getDegrees());
+
+        if(RobotContainer.speed >= 0.65)
+        {SmartDashboard.putBoolean("Boost", true);
+        SmartDashboard.putBoolean("Precision", false);}
+  
+        else if(RobotContainer.speed <= 0.33)
+        {SmartDashboard.putBoolean("Boost",false);
+        SmartDashboard.putBoolean("Precision", true);}
+
+        else
+        {SmartDashboard.putBoolean("Boost", false);
+        SmartDashboard.putBoolean("Precision", false);}
     }
 }
