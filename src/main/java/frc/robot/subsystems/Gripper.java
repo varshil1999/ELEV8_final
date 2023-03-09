@@ -17,9 +17,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Gripper extends SubsystemBase {
   Solenoid SolGrip;
   Compressor comp;
-  I2C.Port i2c;
-  ColorSensorV3 m_colorSensor;
-  ColorMatch m_colorMatcher;
   boolean gripped;
   /** Creates a new Gripper. */
   public Gripper() {
@@ -27,15 +24,11 @@ public class Gripper extends SubsystemBase {
     comp = new Compressor(PneumaticsModuleType.CTREPCM);
     // Intake = new CANSparkMax(2, MotorType.kBrushless);
     comp.enableDigital();
-    i2c = I2C.Port.kMXP;
-    m_colorSensor = new ColorSensorV3(i2c);
-    m_colorMatcher = new ColorMatch();
     SolGrip.set(false);
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("color sensor Proximity", m_colorSensor.getProximity());
     SmartDashboard.putBoolean("is Gripped", gripped);
     // This method will be called once per scheduler run
   }

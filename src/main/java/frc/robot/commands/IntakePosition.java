@@ -91,26 +91,30 @@ public class IntakePosition extends CommandBase {
         SmartDashboard.putNumber("Groundcount", GroundCount);
       
       if ( GroundCount ==0 && Groundonce){
-        // this.intake.OperatorCubeSpeed(-0.25);
-        this.intake.OperatorCubeDegrees(50);
+        this.intake.OperatorCubeDegrees(15);
         this.intake.DriverCubeDegrees();
+        // this.intake.OperatorCubeSpeed(-0.25);
+        this.arm.SetOperatorArmCancoderValues(208.125);
+        this.arm.SetOperatorELbowCancoderValues(-55.84);
+        this.arm.setArmcancoderDegrees();
+        this.arm.setElbowcancoderDegrees();
         GroundCount=1;
         Groundonce = false;
-        flag=true;
+        flag=false;
         
         SmartDashboard.putString("Check Loop","3");
       }
-      else if(GroundCount==1){
-        if( this.intake.PositionIntake() >= 35){
-        this.arm.SetOperatorArmCancoderValues(armpos1);
-        this.arm.SetOperatorELbowCancoderValues(elbowpos1);
-        this.intake.OperatorCubeDegrees(15);
-        this.intake.DriverCubeDegrees();
+      else if(flag == true && GroundCount == 1){
+        this.arm.SetOperatorArmCancoderValues(208.125);
+        this.arm.SetOperatorELbowCancoderValues(-17.84);
+        // this.intake.OperatorCubeDegrees(15);
+        // this.intake.DriverCubeDegrees();
         this.arm.setArmcancoderDegrees();
         this.arm.setElbowcancoderDegrees();
         GroundCount=2;
+        flag = false;
         }
-      }
+      
 
        else if (flag == true && GroundCount==2) {
         this.arm.GripperDegrees(135);
@@ -137,7 +141,6 @@ public class IntakePosition extends CommandBase {
         else if (flag == true && GroundCount == 4) {
           
           if(this.arm.GripperBeamBreaked()==true){
-            
             this.grip.IsGrip(false);
             this.grip.Grip();
             Timer.delay(0.25);

@@ -39,7 +39,7 @@ public class RobotContainer {
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kStart.value);
 
-    public static double speed = 0.8;
+    public static double speed = 0.7;
     // private final JoystickButton IntakeUp = new JoystickButton(driver, XboxController.Button.kX.value);
     // private final JoystickButton IntakeDown = new JoystickButton(driver, XboxController.Button.kB.value);
     // private final JoystickButton IntakeInside = new JoystickButton(driver, XboxController.Button.kY.value);
@@ -52,12 +52,12 @@ public class RobotContainer {
     // private final JoystickButton Solenoid_OFF = new JoystickButton(Joy2, XboxController.Button.kBack.value);
    
     // private final POVButton IntakeJoy2 = new POVButton(Joy2, 270);
-    // // private final POVButton MediumPosition = new POVButton(Joy2, 90);
+    // // private final POVButton MediumPosition = new POVButton(Joy2%, 90);
     // private final POVButton ThrowPosition= new POVButton(Joy2, 0);
     // private final POVButton ThrowPositionHybrid= new POVButton(driver, 0);
     // private final POVButton throwPower  = new POVButton(Joy2, 180);
 
-
+    
     private final JoystickButton OutputPosition = new JoystickButton(driver, XboxController.Button.kA.value);
     private final JoystickButton DropGamePieces = new JoystickButton(driver, XboxController.Button.kB.value);
     private final POVButton GroundPosition = new POVButton(Joy2, 180);
@@ -123,7 +123,7 @@ public class RobotContainer {
         IntakePosition.onTrue(new frc.robot.commands.IntakePosition(intake, inputMode,arm,grip));
         SubstationPosition.onTrue(new frc.robot.commands.SubstationPosition(arm, inputMode));
         precisionButton.whileTrue(new PrecisionCommand(0.5));
-        boostButton.whileTrue(new PrecisionCommand(0.8));
+        boostButton.whileTrue(new PrecisionCommand(0.95));
         // GripperUp.onTrue(new InstantCommand(()-> arm.manualGripperUpOrDown(2)));
         // GripperDown.onTrue(new InstantCommand(()-> arm.manualGripperUpOrDown(-2)));
         // Docking.onTrue(new SequentialCommandGroup(new DockBalance3(s_Swerve),new DockBalanceRest(s_Swerve)));

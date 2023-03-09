@@ -78,8 +78,8 @@ public class DropGamePieces extends CommandBase {
     if (this.lasttimestamp > 1){
     Timer.delay(0.5);
     this.intake.OuttakeCube(0);
-    // this.intake.OperatorCubeDegrees(30);
-    // this.intake.DriverCubeDegrees();
+    this.intake.OperatorCubeDegrees(30);
+    this.intake.DriverCubeDegrees();
     return true;
   }
   else{

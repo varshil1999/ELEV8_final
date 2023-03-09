@@ -29,6 +29,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxRelativeEncoder.Type;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -52,7 +53,7 @@ public class Arm extends SubsystemBase {
   double CurrentDegrees;
 
   public static DigitalInput GripperRoatateBeamBreaker = new DigitalInput(0);
-  public static DigitalInput GripperBeamBreaker = new DigitalInput(1);
+  public static DigitalInput GripperBeamBreaker = new DigitalInput(3);
 
   public CANSparkMax Wrist = new CANSparkMax(15, MotorType.kBrushless);
 
@@ -114,6 +115,7 @@ public class Arm extends SubsystemBase {
 
     
     Wrist.setInverted(true);
+    Wrist.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 100);
     m_pidController = Wrist.getPIDController();
     m_pidController.setOutputRange(-0.5, 0.5);
     m_encoder = Wrist.getEncoder(Type.kHallSensor,42);
@@ -144,6 +146,7 @@ public class Arm extends SubsystemBase {
     SmartDashboard.putNumber("Arm Power", this.Arm.getMotorOutputPercent());
     SmartDashboard.putNumber("Elbow Power", this.Elbow.getMotorOutputPercent());
     SmartDashboard.putBoolean("GripperRotateBeamBreaked", GripperRotateBeamBreaked());
+    SmartDashboard.putBoolean("GripperBeamBreaked", GripperBeamBreaked());
     SmartDashboard.putNumber("Encoder Value",m_encoder.getPosition());
     SmartDashboard.putNumber("Degrees of Intake",WristDegrees);
     SmartDashboard.putNumber("Current Degrees of Intake",CurrentDegrees);

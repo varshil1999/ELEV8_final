@@ -38,34 +38,29 @@ public class Intake extends SubsystemBase {
   public Intake() {
     this.LeftIntake = new TalonFX(9);
     this.LeftIntake.configFactoryDefault();
-    this.LeftIntake.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
+    this.LeftIntake.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 100);
     this.LeftIntake.setSensorPhase(true);
     this.LeftIntake.setInverted(true);
-    this.LeftIntake.configNominalOutputForward(0);
-    this.LeftIntake.configNominalOutputReverse(0);
-    this.LeftIntake.configPeakOutputForward(1);
-    this.LeftIntake.configPeakOutputReverse(-1);
-    this.LeftIntake.configAllowableClosedloopError(0, 0, 30);
-    this.LeftIntake.config_kF(0, 0.0);
-    this.LeftIntake.config_kP(0, 0);
-    this.LeftIntake.config_kI(0, 0);
-    this.LeftIntake.config_kD(0, 0);
+    this.LeftIntake.configPeakOutputForward(1,100);
+    this.LeftIntake.configPeakOutputReverse(-1,100);
+    this.LeftIntake.config_kF(0, 0.0,100);
+    this.LeftIntake.config_kP(0, 0,100);
+    this.LeftIntake.config_kI(0, 0,100);
+    this.LeftIntake.config_kD(0, 0,100);
     this.LeftIntake.setNeutralMode(NeutralMode.Coast);
+    
 
     this.RightIntake = new TalonFX(8);
     this.RightIntake.configFactoryDefault();
-    this.RightIntake.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 30);
+    this.RightIntake.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 100);
     this.RightIntake.setSensorPhase(true);
     this.RightIntake.setInverted(false);
-    this.RightIntake.configNominalOutputForward(0);
-    this.RightIntake.configNominalOutputReverse(0);
-    this.RightIntake.configPeakOutputForward(1);
-    this.RightIntake.configPeakOutputReverse(-1);
-    this.RightIntake.configAllowableClosedloopError(0, 0, 30);
-    this.RightIntake.config_kF(0, 0.0);
-    this.RightIntake.config_kP(0, 0);
-    this.RightIntake.config_kI(0, 0);
-    this.RightIntake.config_kD(0, 0);
+    this.RightIntake.configPeakOutputForward(1,100);
+    this.RightIntake.configPeakOutputReverse(-1,100);
+    this.RightIntake.config_kF(0, 0.0,100);
+    this.RightIntake.config_kP(0, 0,100);
+    this.RightIntake.config_kI(0, 0,100);
+    this.RightIntake.config_kD(0, 0,100);
     this.RightIntake.setNeutralMode(NeutralMode.Coast);
 
     this.Intake = new TalonFX(10,"Canivore");

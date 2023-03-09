@@ -43,7 +43,7 @@ public class ConeAuto extends SequentialCommandGroup {
 
         HashMap<String, Command> eventMap = new HashMap<>();
         
-        List<PathPlannerTrajectory> pathgroup1 = PathPlanner.loadPathGroup("1 Cone + Dock", new PathConstraints(1, 1));
+        List<PathPlannerTrajectory> pathgroup1 = PathPlanner.loadPathGroup("1 Cone + Dock", new PathConstraints(3, 3));
         eventMap.put("Place Cone", new Retractarm(intake, arm, gripper));
 
         SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
@@ -57,7 +57,7 @@ public class ConeAuto extends SequentialCommandGroup {
                                                   // rotation controller)
                 s_Swerve::setModuleStates, // Module states consumer used to output to the drive subsystem
                 eventMap,
-                false,
+                true,
                 s_Swerve // The drive subsystem. Used to properly set the requirements of path following
                          // commands
         );
@@ -78,7 +78,8 @@ public class ConeAuto extends SequentialCommandGroup {
         
         new InstantCommand(() -> s_Swerve.resetOdometry(pathgroup1.get(0).getInitialPose())),
         new HighConeAuto(intake, arm, gripper),
-        new Retractarm(intake, arm, gripper)
+        fullAuto1,
+        new DockBalanceRest(s_Swerve)
         // fullAuto1
                 // fullAuto1//,
                 // fullAuto2

@@ -51,9 +51,9 @@ public class OutputPosition extends CommandBase {
   }
   
     if(this.arm.heightType()==false ){
-      armpos1=164.80;
-      elbowpos1=-74;
-      armpos2=126.47;
+      armpos1=168;
+      elbowpos1=-32;
+      armpos2=128.47;
       elbowpos2=-7;
       
   }
