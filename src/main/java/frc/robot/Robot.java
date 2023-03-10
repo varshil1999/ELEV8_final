@@ -117,7 +117,7 @@ public class Robot extends TimedRobot {
   
     RobotContainer.arm.ResetGripper(true,false,false);
     RobotContainer.arm.HomePostion();
-    RobotContainer.intake.ResetIntake(true,false,false);
+    // RobotContainer.intake.ResetIntake(true,false,false);
     
    
   }

@@ -37,7 +37,7 @@ public class RobotContainer {
 
     // /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
-    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kStart.value);
+    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kBack.value);
 
     public static double speed = 0.7;
     // private final JoystickButton IntakeUp = new JoystickButton(driver, XboxController.Button.kX.value);
@@ -70,6 +70,7 @@ public class RobotContainer {
     private final JoystickButton IntakePosition = new JoystickButton(driver, XboxController.Button.kX.value);
     private final JoystickButton precisionButton = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton boostButton = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
+    private final JoystickButton RetractButtoon = new JoystickButton(driver, XboxController.Button.kStart.value);
     // private final POVButton GripperUp = new POVButton(driver, 90);
     // private final POVButton GripperDown = new POVButton(driver, 270);
     // private final JoystickButton Docking = new JoystickButton(driver, XboxController.Button.kY.value);
@@ -122,6 +123,7 @@ public class RobotContainer {
         DropGamePieces.onTrue(new frc.robot.commands.DropGamePieces(intake, inputMode,arm,grip));
         IntakePosition.onTrue(new frc.robot.commands.IntakePosition(intake, inputMode,arm,grip));
         SubstationPosition.onTrue(new frc.robot.commands.SubstationPosition(arm, inputMode));
+        RetractButtoon.onTrue(new frc.robot.commands.ReintakeSubstation(arm, intake, grip));
         precisionButton.whileTrue(new PrecisionCommand(0.5));
         boostButton.whileTrue(new PrecisionCommand(0.95));
         // GripperUp.onTrue(new InstantCommand(()-> arm.manualGripperUpOrDown(2)));

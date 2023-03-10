@@ -119,9 +119,11 @@ public class IntakePosition extends CommandBase {
        else if (flag == true && GroundCount==2) {
         this.arm.GripperDegrees(135);
         this.arm.GripperRotate();
+        this.grip.IsGrip(true);
+        this.grip.Grip();
         
-          GroundCount = 3;
-          SmartDashboard.putString("Check Loop","4");
+        GroundCount = 3;
+        SmartDashboard.putString("Check Loop","4");
         }
   
          else if (flag == true && GroundCount == 3) {
@@ -130,7 +132,7 @@ public class IntakePosition extends CommandBase {
           this.arm.setArmcancoderDegrees();
           this.arm.setElbowcancoderDegrees();
           
-       
+            
           flag =false;
           
           GroundCount=4;
@@ -139,52 +141,52 @@ public class IntakePosition extends CommandBase {
         }
 
         else if (flag == true && GroundCount == 4) {
-          
-          if(this.arm.GripperBeamBreaked()==true){
-            this.grip.IsGrip(false);
-            this.grip.Grip();
-            Timer.delay(0.25);
-            this.arm.GripperDegrees(-6);
-            this.arm.GripperRotate();
+          returnflag=true;
+        //   if(this.arm.GripperBeamBreaked()==true){
+        //     this.grip.IsGrip(false);
+        //     this.grip.Grip();
+        //     Timer.delay(0.25);
+        //     this.arm.GripperDegrees(-6);
+        //     this.arm.GripperRotate();
 
-           GroundCount=5;
+        //    GroundCount=5;
            
+        //   }
+        // }
+        
+        //   else if(GroundCount==5){
+        //     this.arm.SetOperatorArmCancoderValues(208.125);
+        //     this.arm.SetOperatorELbowCancoderValues(-17.84);
+        //     this.arm.setArmcancoderDegrees();
+        //     this.arm.setElbowcancoderDegrees();
+        //     flag=false;
+        //     GroundCount=6;
+        //   }
+        //   else if(GroundCount==6&& flag == true){
+        //     this.arm.SetOperatorArmCancoderValues(208.125);
+        //     this.arm.SetOperatorELbowCancoderValues(-55.84);
+        //     this.arm.setArmcancoderDegrees();
+        //     this.arm.setElbowcancoderDegrees();
+        //     flag=false;
+        //     GroundCount=7;
+        //   }
+        //   else if(GroundCount==7&& flag==true){
+        //     this.arm.SetOperatorArmCancoderValues(169);
+        //     this.arm.SetOperatorELbowCancoderValues(-112.67);
+        //     this.arm.setArmcancoderDegrees();
+        //     this.arm.setElbowcancoderDegrees();
+        //     flag=false;
+        //     GroundCount=8;
+        //   }
+        //   else if(GroundCount==8 && flag==true){
+        //     this.intake.OperatorCubeDegrees(15);
+        //     this.intake.DriverCubeDegrees();
+         
+        //       returnflag=true;
+        //     }
+          
           }
         }
-        
-          else if(GroundCount==5){
-            this.arm.SetOperatorArmCancoderValues(208.125);
-            this.arm.SetOperatorELbowCancoderValues(-17.84);
-            this.arm.setArmcancoderDegrees();
-            this.arm.setElbowcancoderDegrees();
-            flag=false;
-            GroundCount=6;
-          }
-          else if(GroundCount==6&& flag == true){
-            this.arm.SetOperatorArmCancoderValues(208.125);
-            this.arm.SetOperatorELbowCancoderValues(-55.84);
-            this.arm.setArmcancoderDegrees();
-            this.arm.setElbowcancoderDegrees();
-            flag=false;
-            GroundCount=7;
-          }
-          else if(GroundCount==7&& flag==true){
-            this.arm.SetOperatorArmCancoderValues(169);
-            this.arm.SetOperatorELbowCancoderValues(-112.67);
-            this.arm.setArmcancoderDegrees();
-            this.arm.setElbowcancoderDegrees();
-            flag=false;
-            GroundCount=8;
-          }
-          else if(GroundCount==8 && flag==true){
-            this.intake.OperatorCubeDegrees(15);
-            this.intake.DriverCubeDegrees();
-         
-              returnflag=true;
-            }
-          
-          }
-          
 
          
       

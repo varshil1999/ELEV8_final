@@ -60,7 +60,7 @@ public class Arm extends SubsystemBase {
   private SparkMaxPIDController m_pidController;
   private RelativeEncoder m_encoder;
  
-  private double armspeed = 0.3, elbowspeed = 0.3;
+  private double armspeed = 0.6, elbowspeed = 0.6;
   // private double ChangedArmSpeed = 0.3, ChangedElbowSpeed = 0.3;
   private boolean Ground;
 
@@ -84,8 +84,8 @@ public class Arm extends SubsystemBase {
     this.Elbow.config_kD(0, 0);
     this.Elbow.setNeutralMode(NeutralMode.Coast);
     this.Elbow.selectProfileSlot(0, 0);
-    this.Elbow.configMotionCruiseVelocity(6000, 30);
-		this.Elbow.configMotionAcceleration(6000, 30);
+    this.Elbow.configMotionCruiseVelocity(10000, 30);
+		this.Elbow.configMotionAcceleration(10000, 30);
 
     this.Arm = new TalonFX(7,"Canivore");
     this.Arm.configFactoryDefault();
@@ -103,8 +103,8 @@ public class Arm extends SubsystemBase {
     this.Arm.config_kD(0, 0);
     this.Arm.setNeutralMode(NeutralMode.Coast);
     this.Arm.selectProfileSlot(0, 0);
-    this.Arm.configMotionCruiseVelocity(6000, 30);
-		this.Arm.configMotionAcceleration(6000, 30);
+    this.Arm.configMotionCruiseVelocity(10000, 30);
+		this.Arm.configMotionAcceleration(10000, 30);
     this.CANCoderArm = new CANCoder(9,"Canivore");
     this.CANCoderElbow = new CANCoder(7,"Canivore");
     CANCoderArm.configFactoryDefault();
