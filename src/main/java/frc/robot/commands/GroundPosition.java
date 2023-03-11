@@ -42,8 +42,8 @@ public class GroundPosition extends CommandBase {
     else if(this.mode.Mode == false){
       this.arm.InputSUBORGRO(true);
       this.intake.OperatorCubeDegrees(115);
-      this.arm.SetOperatorArmCancoderValues(141.32);
-      this.arm.SetOperatorELbowCancoderValues(-124.62);
+      this.arm.SetOperatorArmCancoderValues(194.68);///141.32
+      this.arm.SetOperatorELbowCancoderValues(207.05);//-124.62
     }
   }
 

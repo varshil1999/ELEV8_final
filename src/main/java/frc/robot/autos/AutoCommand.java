@@ -38,7 +38,7 @@ public class AutoCommand extends SequentialCommandGroup {
 
         HashMap<String, Command> eventMap = new HashMap<>();
         
-        List<PathPlannerTrajectory> pathgroup1 = PathPlanner.loadPathGroup("5meter straight", new PathConstraints(1, 1));
+        // List<PathPlannerTrajectory> pathgroup1 = PathPlanner.loadPathGroup("5meter straight", new PathConstraints(1, 1));
 
         // eventMap.put("Lift Low", new ShootCube(cubeSubsystem, 10000));
         
@@ -46,15 +46,11 @@ public class AutoCommand extends SequentialCommandGroup {
 
         // eventMap.put("Shoot Cube", new ShootCube(cubeSubsystem, 10000));
 
-        List<PathPlannerTrajectory> pathgroup2 = PathPlanner.loadPathGroup("Auto 3", new PathConstraints(1, 1));
+        List<PathPlannerTrajectory> pathgroup2 = PathPlanner.loadPathGroup("2Cubes+Dock", new PathConstraints(4, 3));
+        eventMap.put("FirstCube", new SequentialCommandGroup(new CubePosition(intake),new ShootCube(intake, 0.43)));
         eventMap.put("Intake", new IntakeCube(intake, 20));
-        eventMap.put("Angle Low", new CubePosition(intake));
-        eventMap.put("Shoot Low", new ShootCube(intake, 0.1));
-        //eventMap.put("Angle Mid", new InstantCommand(()-> new SequentialCommandGroup(new InstantCommand(()->this.intake.OperatorCubeDegrees(43)),new InstantCommand(()->this.intake.DriverCubeDegrees()))));
-        eventMap.put("Angle Mid", new CubePosition(intake));
-        eventMap.put("Shoot Mid", new ShootCube(intake, 0.25));
-        eventMap.put("Angle High",new SequentialCommandGroup(new SetIntakeAngle(intake),new ShootCube(intake, 0.45)) );
-        eventMap.put("Shoot High", new PrintCommand("Done"));
+        eventMap.put("SetHigh", new CubePosition(intake));
+        eventMap.put("Shoot High", new ShootCube(intake, 0.43));
 
         
         // List<PathPlannerTrajectory> pathgroup2 = PathPlanner.loadPathGroup("Hello World", new PathConstraints(2.0, 2.0));
@@ -96,7 +92,7 @@ public class AutoCommand extends SequentialCommandGroup {
                 Constants.Swerve.swerveKinematics, // SwerveDriveKinematics
                 new PIDConstants(5.8, 0.0, 0.0), // PID constants to correct for translation error (used to create the X
                                                  // and Y PID controllers)
-                new PIDConstants(4.5, 0.0, 0.0), // PID constants to correct for rotation error (used to create the
+                new PIDConstants(5.0, 0.0, 0.0), // PID constants to correct for rotation error (used to create the
                                                   // rotation controller)
                 s_Swerve::setModuleStates, // Module states consumer used to output to the drive subsystem
                 eventMap,
@@ -105,28 +101,12 @@ public class AutoCommand extends SequentialCommandGroup {
                          // commands
         );
 
-        Command fullAuto = autoBuilder.fullAuto(pathgroup1.get(0));
-        // Command fullAuto1 = autoBuilder.fullAuto(pathgroup2.get(1));
-        // Command fullAuto2 = autoBuilder.fullAuto(pathgroup2.get(2));
-        // Command fullAuto3 = autoBuilder.fullAuto(pathgroup2.get(3));
-        // Command fullAuto4 = autoBuilder.fullAuto(pathgroup2.get(4));
-        // Command fullAuto5 = autoBuilder.fullAuto(pathgroup2.get(5));
-        // Command fullAuto6 = autoBuilder.fullAuto(pathgroup2.get(6));
-
-        // Command fullAuto1 = autoBuilder.fullAuto(pathgroup2.get(0));
-
-        // Command fullAuto1 = autoBuilder.fullAuto(pathgroup1.get(1));
+        Command fullAuto = autoBuilder.fullAuto(pathgroup2.get(0));
 
         addCommands(
-                // new InstantCommand(() -> s_Swerve.resetOdometry(pathgroup2.get(0).getInitialPose())),
-                fullAuto
-                // fullAuto1//,
-                // fullAuto2
-                // fullAuto3,
-                // fullAuto4,
-                // fullAuto5,
-                // fullAuto6)
+                fullAuto,
+                new DockBalanceRest(s_Swerve)
         );
-//     }
+
 }
 }

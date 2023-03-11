@@ -61,8 +61,7 @@ public class DropGamePieces extends CommandBase {
       // this.intake.OuttakeCube(0);
       this.grip.IsGrip(false);
       this.grip.Grip();
-      this.intake.OperatorCubeDegrees(30);
-      this.intake.DriverCubeDegrees();
+      
       returnflag=true;
 } 
   }
@@ -75,10 +74,10 @@ public class DropGamePieces extends CommandBase {
   @Override
   public boolean isFinished() {
     if(this.mode.Mode==true){
-    if (this.lasttimestamp > 1){
-    Timer.delay(0.5);
+    if (this.lasttimestamp > 0.5){
+   
     this.intake.OuttakeCube(0);
-    this.intake.OperatorCubeDegrees(30);
+    this.intake.OperatorCubeDegrees(15);
     this.intake.DriverCubeDegrees();
     return true;
   }
@@ -87,6 +86,8 @@ public class DropGamePieces extends CommandBase {
   }
   }
   else if(this.mode.Mode == false){ 
+    this.intake.OperatorCubeDegrees(30);
+    this.intake.DriverCubeDegrees();
     return returnflag;
   }
   else{

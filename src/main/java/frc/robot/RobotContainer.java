@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
+import frc.robot.commands.DockBalance3;
+import frc.robot.commands.DockBalanceRest;
 import frc.robot.subsystems.*;
 // import frc.robot.subsystems.PoseEstimator;
     
@@ -73,7 +75,7 @@ public class RobotContainer {
     private final JoystickButton RetractButtoon = new JoystickButton(driver, XboxController.Button.kStart.value);
     // private final POVButton GripperUp = new POVButton(driver, 90);
     // private final POVButton GripperDown = new POVButton(driver, 270);
-    // private final JoystickButton Docking = new JoystickButton(driver, XboxController.Button.kY.value);
+    private final JoystickButton Docking = new JoystickButton(Joy2, XboxController.Button.kStart.value);
     // private final JoystickButton Resting = new JoystickButton(driver, XboxController.Button.kX.value);
 
 
@@ -128,7 +130,7 @@ public class RobotContainer {
         boostButton.whileTrue(new PrecisionCommand(0.95));
         // GripperUp.onTrue(new InstantCommand(()-> arm.manualGripperUpOrDown(2)));
         // GripperDown.onTrue(new InstantCommand(()-> arm.manualGripperUpOrDown(-2)));
-        // Docking.onTrue(new SequentialCommandGroup(new DockBalance3(s_Swerve),new DockBalanceRest(s_Swerve)));
+        Docking.onTrue(new SequentialCommandGroup(new DockBalance3(s_Swerve),new DockBalanceRest(s_Swerve)));
         // Resting.onTrue(new DockBalanceRest(s_Swerve));
 
         // SubstationPo sition.onTrue(new frc.robot.commands.GroundPosition(intake, inputMode));
@@ -169,7 +171,7 @@ public class RobotContainer {
     }
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new ConeAuto(s_Swerve,intake,arm,grip);
+        return new AutoCommand(s_Swerve);
         // return null;
     }
 }

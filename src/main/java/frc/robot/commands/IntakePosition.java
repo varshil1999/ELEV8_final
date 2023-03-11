@@ -47,14 +47,14 @@ public class IntakePosition extends CommandBase {
     Groundreturnflag =false;
     once = true;
     flag = true;
-    armpos1=165;
-    elbowpos1=-37;
-    armpos2=185;
-    elbowpos2=-35.5;
+    armpos1=218.36;//165
+    elbowpos1=294.67;//-37
+    armpos2=238.36;//185;
+    elbowpos2=296.17;//-35.5;
     this.grip.IsGrip(true);
     this.grip.Grip();
     this.intake.OperatorCubeSpeed(0.3);
-    this.intake.OperatorCubeDegrees(117);
+    this.intake.OperatorCubeDegrees(115);
     SmartDashboard.putString("Check Loop","0");
   }
 
@@ -76,7 +76,7 @@ public class IntakePosition extends CommandBase {
           SmartDashboard.putString("Output", "Cube Ground Position");
           SmartDashboard.putString("Check Loop","1");
           return;
-        } else if (this.intake.detectBeamBreaker1() == true) {
+        } else if (this.intake.detectBeamBreaker1() == true) {  
           this.intake.IntakeCube(0);
           this.intake.OperatorCubeDegrees(30);
           this.intake.DriverCubeDegrees();
@@ -94,8 +94,8 @@ public class IntakePosition extends CommandBase {
         this.intake.OperatorCubeDegrees(15);
         this.intake.DriverCubeDegrees();
         // this.intake.OperatorCubeSpeed(-0.25);
-        this.arm.SetOperatorArmCancoderValues(208.125);
-        this.arm.SetOperatorELbowCancoderValues(-55.84);
+        this.arm.SetOperatorArmCancoderValues(261.485);//208.125
+        this.arm.SetOperatorELbowCancoderValues(276.38);//-55.84
         this.arm.setArmcancoderDegrees();
         this.arm.setElbowcancoderDegrees();
         GroundCount=1;
@@ -105,8 +105,8 @@ public class IntakePosition extends CommandBase {
         SmartDashboard.putString("Check Loop","3");
       }
       else if(flag == true && GroundCount == 1){
-        this.arm.SetOperatorArmCancoderValues(208.125);
-        this.arm.SetOperatorELbowCancoderValues(-17.84);
+        this.arm.SetOperatorArmCancoderValues(261.485);//208.125
+        this.arm.SetOperatorELbowCancoderValues(314.38);//-17.84
         // this.intake.OperatorCubeDegrees(15);
         // this.intake.DriverCubeDegrees();
         this.arm.setArmcancoderDegrees();
@@ -141,53 +141,51 @@ public class IntakePosition extends CommandBase {
         }
 
         else if (flag == true && GroundCount == 4) {
-          returnflag=true;
-        //   if(this.arm.GripperBeamBreaked()==true){
-        //     this.grip.IsGrip(false);
-        //     this.grip.Grip();
-        //     Timer.delay(0.25);
-        //     this.arm.GripperDegrees(-6);
-        //     this.arm.GripperRotate();
+          if(this.arm.GripperBeamBreaked()==true){
+            this.grip.IsGrip(false);
+            this.grip.Grip();
+            Timer.delay(0.25);
+            this.arm.GripperDegrees(-6);
+            this.arm.GripperRotate();
 
-        //    GroundCount=5;
+           GroundCount=5;
            
-        //   }
-        // }
-        
-        //   else if(GroundCount==5){
-        //     this.arm.SetOperatorArmCancoderValues(208.125);
-        //     this.arm.SetOperatorELbowCancoderValues(-17.84);
-        //     this.arm.setArmcancoderDegrees();
-        //     this.arm.setElbowcancoderDegrees();
-        //     flag=false;
-        //     GroundCount=6;
-        //   }
-        //   else if(GroundCount==6&& flag == true){
-        //     this.arm.SetOperatorArmCancoderValues(208.125);
-        //     this.arm.SetOperatorELbowCancoderValues(-55.84);
-        //     this.arm.setArmcancoderDegrees();
-        //     this.arm.setElbowcancoderDegrees();
-        //     flag=false;
-        //     GroundCount=7;
-        //   }
-        //   else if(GroundCount==7&& flag==true){
-        //     this.arm.SetOperatorArmCancoderValues(169);
-        //     this.arm.SetOperatorELbowCancoderValues(-112.67);
-        //     this.arm.setArmcancoderDegrees();
-        //     this.arm.setElbowcancoderDegrees();
-        //     flag=false;
-        //     GroundCount=8;
-        //   }
-        //   else if(GroundCount==8 && flag==true){
-        //     this.intake.OperatorCubeDegrees(15);
-        //     this.intake.DriverCubeDegrees();
-         
-        //       returnflag=true;
-        //     }
-          
           }
         }
-
+        
+          else if(GroundCount==5){
+            this.arm.SetOperatorArmCancoderValues(261.485);//208.125
+            this.arm.SetOperatorELbowCancoderValues(314.38);//-17.84
+            this.arm.setArmcancoderDegrees();
+            this.arm.setElbowcancoderDegrees();
+            flag=false;
+            GroundCount=6;
+          }
+          else if(GroundCount==6&& flag == true){
+            this.arm.SetOperatorArmCancoderValues(261.485);//208.125
+            this.arm.SetOperatorELbowCancoderValues(276.38);//-55.84
+            this.arm.setArmcancoderDegrees();
+            this.arm.setElbowcancoderDegrees();
+            flag=false;
+            GroundCount=7;
+          }
+          else if(GroundCount==7&& flag==true){
+            this.arm.SetOperatorArmCancoderValues(222.36);//169
+            this.arm.SetOperatorELbowCancoderValues(219.55);//-112.67
+            this.arm.setArmcancoderDegrees();
+            this.arm.setElbowcancoderDegrees();
+            flag=false;
+            GroundCount=8;
+          }
+          else if(GroundCount==8 && flag==true){
+            this.intake.OperatorCubeDegrees(15);
+            this.intake.DriverCubeDegrees();
+         
+              returnflag=true;
+            }
+          
+          }
+        
          
       
       if(this.arm.GroundType()==true ){ 
@@ -217,8 +215,8 @@ public class IntakePosition extends CommandBase {
         this.grip.IsGrip(false);
         this.grip.Grip();
         Timer.delay(0.5);
-        this.arm.SetOperatorArmCancoderValues(137.72);
-        this.arm.SetOperatorELbowCancoderValues(-110.91);
+        this.arm.SetOperatorArmCancoderValues(191.08);//137.72
+        this.arm.SetOperatorELbowCancoderValues(221.31);//-110.91
         this.intake.OperatorCubeSpeed(-0.14);
         this.intake.DriverCubeSpeed();
         this.arm.GripperDegrees(58);
@@ -231,8 +229,8 @@ public class IntakePosition extends CommandBase {
         SmartDashboard.putString("Check Loop","9");
 
       } else if (flag == true && count == 1) {
-        this.arm.SetOperatorArmCancoderValues(148.00);
-        this.arm.SetOperatorELbowCancoderValues(-110.91);
+        this.arm.SetOperatorArmCancoderValues(201.36);//148.00
+        this.arm.SetOperatorELbowCancoderValues(221.31);//-110.91
         this.arm.GripperDegrees(8);
         this.arm.GripperRotate();
         this.intake.OperatorCubeSpeed(0);
@@ -243,8 +241,8 @@ public class IntakePosition extends CommandBase {
         count = 2;
         SmartDashboard.putString("Check Loop","10");
       } else if (flag == true && count == 2) {
-        this.arm.SetOperatorArmCancoderValues(169);
-        this.arm.SetOperatorELbowCancoderValues(-112.67);
+        this.arm.SetOperatorArmCancoderValues(222.36);
+        this.arm.SetOperatorELbowCancoderValues(219.55);//-112.67
         this.arm.GripperDegrees(-6);
         this.arm.GripperRotate();
         this.arm.setArmcancoderDegrees();

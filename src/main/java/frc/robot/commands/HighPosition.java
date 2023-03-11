@@ -35,8 +35,8 @@ public class HighPosition extends CommandBase {
   @Override
   public void execute() {
     if(this.mode.Mode==true){
-      this.intake.OperatorCubeSpeed(-0.48);
-      this.intake.OperatorCubeDegrees(43);
+      this.intake.OperatorCubeSpeed(-0.43);
+      this.intake.OperatorCubeDegrees(45);
       SmartDashboard.putString("Output", "Cube High Position");
     }
     else if(this.mode.Mode == false){

@@ -29,6 +29,7 @@ public class CubePosition extends CommandBase {
   public void execute() {
     this.intake.OperatorCubeDegrees(43);
     this.intake.DriverCubeDegrees();
+    if(this.intake.PositionIntake()>=42)
     flag = true;
   }
 

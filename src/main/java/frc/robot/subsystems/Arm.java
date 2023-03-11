@@ -53,14 +53,14 @@ public class Arm extends SubsystemBase {
   double CurrentDegrees;
 
   public static DigitalInput GripperRoatateBeamBreaker = new DigitalInput(0);
-  public static DigitalInput GripperBeamBreaker = new DigitalInput(3);
+  public static DigitalInput GripperBeamBreaker = new DigitalInput(1);
 
   public CANSparkMax Wrist = new CANSparkMax(15, MotorType.kBrushless);
 
   private SparkMaxPIDController m_pidController;
   private RelativeEncoder m_encoder;
  
-  private double armspeed = 0.6, elbowspeed = 0.6;
+  private double armspeed = 0.3, elbowspeed = 0.3;
   // private double ChangedArmSpeed = 0.3, ChangedElbowSpeed = 0.3;
   private boolean Ground;
 
@@ -111,7 +111,7 @@ public class Arm extends SubsystemBase {
     CANCoderElbow.configFactoryDefault();
 
     CANCoderArm.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
-    CANCoderElbow.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
+    CANCoderElbow.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
 
     
     Wrist.setInverted(true);
@@ -121,8 +121,8 @@ public class Arm extends SubsystemBase {
     m_encoder = Wrist.getEncoder(Type.kHallSensor,42);
     m_pidController.setP(0.5);
 
-    ArmCancoderzero = 169;
-    ElbowCancoderzero = -112.67;
+    ArmCancoderzero = 222.36;
+    ElbowCancoderzero = 219.55;
     this.Arm.setSelectedSensorPosition((ArmCancoderzero - CANCoderArm.getAbsolutePosition()) * 1706.67);
     this.Elbow.setSelectedSensorPosition((ElbowCancoderzero - CANCoderElbow.getAbsolutePosition()) * 1706.67);
     
@@ -135,7 +135,6 @@ public class Arm extends SubsystemBase {
     // this.Arm.setSelectedSensorPosition(0);
     // this.Elbow.setSelectedSensorPosition(00);
   }
-
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Cancoder Arm", CANCoderArm.getAbsolutePosition());
@@ -146,7 +145,7 @@ public class Arm extends SubsystemBase {
     SmartDashboard.putNumber("Arm Power", this.Arm.getMotorOutputPercent());
     SmartDashboard.putNumber("Elbow Power", this.Elbow.getMotorOutputPercent());
     SmartDashboard.putBoolean("GripperRotateBeamBreaked", GripperRotateBeamBreaked());
-    SmartDashboard.putBoolean("GripperBeamBreaked", GripperBeamBreaked());
+    SmartDashboard.putBoolean("1111111GripperBeamBreaked", GripperBeamBreaked());
     SmartDashboard.putNumber("Encoder Value",m_encoder.getPosition());
     SmartDashboard.putNumber("Degrees of Intake",WristDegrees);
     SmartDashboard.putNumber("Current Degrees of Intake",CurrentDegrees);
@@ -205,9 +204,9 @@ public class Arm extends SubsystemBase {
     // ElbowCancoderzero = 28.125;
     SetOperatorArmCancoderValues(ArmCancoderzero);
     SetOperatorELbowCancoderValues(ElbowCancoderzero);
-    this.Elbow.set(TalonFXControlMode.Position,  CountsFromElbowCancoder());
-    // Timer.delay(2);
-    this.Arm.set(TalonFXControlMode.Position,  CountsFromArmCancoder());
+    this.Elbow.set(TalonFXControlMode.MotionMagic,  0);
+    this.Arm.set(TalonFXControlMode.MotionMagic,  0);
+
     
 
   }
@@ -294,8 +293,7 @@ public class Arm extends SubsystemBase {
   }
 
   public void MoveElbow(double degrees) {
-    this.Elbow.set(TalonFXControlMode.Position,
-        this.Elbow.getSelectedSensorPosition() + CountsFromElbowDegree(degrees));
+    this.Elbow.set(TalonFXControlMode.Position, this.Elbow.getSelectedSensorPosition() + CountsFromElbowDegree(degrees));
   }
 
   public double getCancoderArmValue() {
@@ -450,7 +448,7 @@ public class Arm extends SubsystemBase {
   public void GripperRotate() {
     this.m_pidController.setReference(GripperValueConversion(), CANSparkMax.ControlType.kPosition);
   }
-
+  
 
   public void manualGripperUpOrDown(double degrees) {
     CurrentDegrees = CurrentDegrees+degrees;

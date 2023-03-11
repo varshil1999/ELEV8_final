@@ -48,7 +48,7 @@ public class ShootCube extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(this.lastTimeStamp>=1){
+    if(this.lastTimeStamp>=0.7){
       this.intake.OperatorCubeSpeed(0);
       this.intake.DriverCubeSpeed();
       this.intake.OperatorCubeDegrees(20);

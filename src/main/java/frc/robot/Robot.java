@@ -11,7 +11,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Intake;
 // import frc.robot.subsystems.PoseEstimator;
-import frc.robot.subsystems.Swerve;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
   public static CTREConfigs ctreConfigs;
 
   private Command m_autonomousCommand;
-  private Swerve mSwerve;
+ 
 
   // private PoseEstimator poseEstimator;
 
@@ -40,14 +40,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     ctreConfigs = new CTREConfigs();
-    mSwerve = new Swerve();
-    
-
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    mSwerve.resetAnglesToAbsolute();
+ 
   }
 
   /**
@@ -117,8 +114,7 @@ public class Robot extends TimedRobot {
   
     RobotContainer.arm.ResetGripper(true,false,false);
     RobotContainer.arm.HomePostion();
-    // RobotContainer.intake.ResetIntake(true,false,false);
-    
+    RobotContainer.intake.ResetIntake(true,false,false);
    
   }
 

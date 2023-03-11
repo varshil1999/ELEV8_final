@@ -36,7 +36,7 @@ public class MediumPosition extends CommandBase {
   @Override
   public void execute() {
     if(this.mode.Mode==true){
-      this.intake.OperatorCubeSpeed(-0.35);
+      this.intake.OperatorCubeSpeed(-0.28);
       this.intake.OperatorCubeDegrees(43);
       SmartDashboard.putString("Output", "Cube Medium Position");
     }

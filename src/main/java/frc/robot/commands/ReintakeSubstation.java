@@ -49,24 +49,24 @@ public class ReintakeSubstation extends CommandBase {
             GroundOnce = false;
             }
             else if(GroundCount==5&&GroundOnce == false){
-            this.arm.SetOperatorArmCancoderValues(208.125);
-            this.arm.SetOperatorELbowCancoderValues(-17.84);
+            this.arm.SetOperatorArmCancoderValues(261.125);
+            this.arm.SetOperatorELbowCancoderValues(314.38);
             this.arm.setArmcancoderDegrees();
             this.arm.setElbowcancoderDegrees();
             flag=false;
             GroundCount=6;
             }
             else if(GroundCount==6&& flag == true){
-            this.arm.SetOperatorArmCancoderValues(208.125);
-            this.arm.SetOperatorELbowCancoderValues(-55.84);
+            this.arm.SetOperatorArmCancoderValues(261.485);
+            this.arm.SetOperatorELbowCancoderValues(276.38);
             this.arm.setArmcancoderDegrees();
             this.arm.setElbowcancoderDegrees();
             flag=false;
             GroundCount=7;
             }
             else if(GroundCount==7&& flag==true){
-            this.arm.SetOperatorArmCancoderValues(169);
-            this.arm.SetOperatorELbowCancoderValues(-112.67);
+            this.arm.SetOperatorArmCancoderValues(222.36);
+            this.arm.SetOperatorELbowCancoderValues(219.55);
             this.arm.setArmcancoderDegrees();
             this.arm.setElbowcancoderDegrees();
             flag=false;
