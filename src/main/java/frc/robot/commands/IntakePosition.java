@@ -50,7 +50,7 @@ public class IntakePosition extends CommandBase {
     armpos1=218.36;//165
     elbowpos1=294.67;//-37
     armpos2=238.36;//185;
-    elbowpos2=296.17;//-35.5;
+    elbowpos2=292.17;//-35.5;
     this.grip.IsGrip(true);
     this.grip.Grip();
     this.intake.OperatorCubeSpeed(0.3);
@@ -106,7 +106,7 @@ public class IntakePosition extends CommandBase {
       }
       else if(flag == true && GroundCount == 1){
         this.arm.SetOperatorArmCancoderValues(261.485);//208.125
-        this.arm.SetOperatorELbowCancoderValues(314.38);//-17.84
+        this.arm.SetOperatorELbowCancoderValues(310.38);//-17.84
         // this.intake.OperatorCubeDegrees(15);
         // this.intake.DriverCubeDegrees();
         this.arm.setArmcancoderDegrees();
@@ -145,7 +145,7 @@ public class IntakePosition extends CommandBase {
             this.grip.IsGrip(false);
             this.grip.Grip();
             Timer.delay(0.25);
-            this.arm.GripperDegrees(-6);
+            this.arm.GripperDegrees(-10);
             this.arm.GripperRotate();
 
            GroundCount=5;

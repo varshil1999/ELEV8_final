@@ -4,6 +4,8 @@ import frc.robot.Constants;
 import frc.robot.autos.IntakeCube;
 import frc.robot.autos.SetIntakeAngle;
 import frc.robot.autos.ShootCube;
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Gripper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Swerve;
 
@@ -33,8 +35,8 @@ import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class AutoCommand extends SequentialCommandGroup {
-    Intake intake = new Intake();
-    public AutoCommand(Swerve s_Swerve) {
+
+    public AutoCommand(Swerve s_Swerve,Intake intake,Arm arm,Gripper gripper) {
 
         HashMap<String, Command> eventMap = new HashMap<>();
         
@@ -46,11 +48,18 @@ public class AutoCommand extends SequentialCommandGroup {
 
         // eventMap.put("Shoot Cube", new ShootCube(cubeSubsystem, 10000));
 
-        List<PathPlannerTrajectory> pathgroup2 = PathPlanner.loadPathGroup("2Cubes+Dock", new PathConstraints(4, 3));
-        eventMap.put("FirstCube", new SequentialCommandGroup(new CubePosition(intake),new ShootCube(intake, 0.43)));
+        // List<PathPlannerTrajectory> pathgroup2 = PathPlanner.loadPathGroup("2Cubes+Dock", new PathConstraints(4, 3));
+        // eventMap.put("FirstCube", new SequentialCommandGroup(new CubePosition(intake),new ShootCube(intake, 0.43)));
+        // eventMap.put("Intake", new IntakeCube(intake, 20));
+        // eventMap.put("SetHigh", new CubePosition(intake));
+        // eventMap.put("Shoot High", new ShootCube(intake, 0.43));
+
+        List<PathPlannerTrajectory> pathgroup3 = PathPlanner.loadPathGroup("Cone+Cube+Dock", new PathConstraints(3, 2.5));
+      
+        eventMap.put("RetractArm", new Retractarm(intake, arm, gripper));
         eventMap.put("Intake", new IntakeCube(intake, 20));
-        eventMap.put("SetHigh", new CubePosition(intake));
-        eventMap.put("Shoot High", new ShootCube(intake, 0.43));
+        eventMap.put("Cube Position", new CubePosition(intake));
+        eventMap.put("Cube Shoot", new ShootCube(intake, 0.43));
 
         
         // List<PathPlannerTrajectory> pathgroup2 = PathPlanner.loadPathGroup("Hello World", new PathConstraints(2.0, 2.0));
@@ -101,11 +110,12 @@ public class AutoCommand extends SequentialCommandGroup {
                          // commands
         );
 
-        Command fullAuto = autoBuilder.fullAuto(pathgroup2.get(0));
+        Command fullAuto = autoBuilder.fullAuto(pathgroup3.get(0));
 
         addCommands(
+                new HighConeAuto(intake, arm, gripper),
                 fullAuto,
-                new DockBalanceRest(s_Swerve)
+                new SequentialCommandGroup(new DockBalance3(s_Swerve),new DockBalanceRest(s_Swerve))
         );
 
 }

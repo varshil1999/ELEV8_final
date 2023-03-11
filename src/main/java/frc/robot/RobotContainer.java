@@ -75,8 +75,8 @@ public class RobotContainer {
     private final JoystickButton RetractButtoon = new JoystickButton(driver, XboxController.Button.kStart.value);
     // private final POVButton GripperUp = new POVButton(driver, 90);
     // private final POVButton GripperDown = new POVButton(driver, 270);
-    private final JoystickButton Docking = new JoystickButton(Joy2, XboxController.Button.kStart.value);
-    // private final JoystickButton Resting = new JoystickButton(driver, XboxController.Button.kX.value);
+    // private final JoystickButton Docking = new JoystickButton(driver, XboxController.Button.kStart.value);
+    private final JoystickButton Resting = new JoystickButton(Joy2, XboxController.Button.kStart.value);
 
 
     // private final POVButton MediumPosition = new POVButton(driver, 0);
@@ -85,7 +85,7 @@ public class RobotContainer {
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     public static Arm arm = new Arm();
-    static Intake intake = new Intake();
+    public static Intake intake = new Intake();
     private final InputMode inputMode = new InputMode();
     private final Gripper grip = new Gripper();
     // private final PoseEstimator PoseEstimator = new PoseEstimator(photonCamera, s_Swerve);
@@ -130,8 +130,8 @@ public class RobotContainer {
         boostButton.whileTrue(new PrecisionCommand(0.95));
         // GripperUp.onTrue(new InstantCommand(()-> arm.manualGripperUpOrDown(2)));
         // GripperDown.onTrue(new InstantCommand(()-> arm.manualGripperUpOrDown(-2)));
-        Docking.onTrue(new SequentialCommandGroup(new DockBalance3(s_Swerve),new DockBalanceRest(s_Swerve)));
-        // Resting.onTrue(new DockBalanceRest(s_Swerve));
+        // Docking.onTrue(new SequentialCommandGroup(new DockBalance3(s_Swerve),new DockBalanceRest(s_Swerve)));
+        Resting.onTrue(new DockBalanceRest(s_Swerve));
 
         // SubstationPo sition.onTrue(new frc.robot.commands.GroundPosition(intake, inputMode));
         /* Driver Buttons */
@@ -171,7 +171,7 @@ public class RobotContainer {
     }
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new AutoCommand(s_Swerve);
+        return new AutoCommand(s_Swerve, intake, arm, grip);
         // return null;
     }
 }

@@ -60,7 +60,7 @@ public class Arm extends SubsystemBase {
   private SparkMaxPIDController m_pidController;
   private RelativeEncoder m_encoder;
  
-  private double armspeed = 0.3, elbowspeed = 0.3;
+  private double armspeed = 0.6, elbowspeed = 0.6;
   // private double ChangedArmSpeed = 0.3, ChangedElbowSpeed = 0.3;
   private boolean Ground;
 

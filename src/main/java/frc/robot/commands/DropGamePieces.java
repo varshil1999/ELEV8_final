@@ -49,7 +49,6 @@ public class DropGamePieces extends CommandBase {
 
       this.grip.IsGrip(true);
       this.grip.Grip();
-      Timer.delay(0.5);
       this.arm.GripperDegrees(-6);
       this.arm.GripperRotate();
       this.arm.HomePostion();
