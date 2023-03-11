@@ -125,7 +125,7 @@ public class RobotContainer {
         DropGamePieces.onTrue(new frc.robot.commands.DropGamePieces(intake, inputMode,arm,grip));
         IntakePosition.onTrue(new frc.robot.commands.IntakePosition(intake, inputMode,arm,grip));
         SubstationPosition.onTrue(new frc.robot.commands.SubstationPosition(arm, inputMode));
-        RetractButtoon.onTrue(new frc.robot.commands.ReintakeSubstation(arm, intake, grip));
+        // RetractButtoon.onTrue(new frc.robot.commands.ReintakeSubstation(arm, intake, grip));
         precisionButton.whileTrue(new PrecisionCommand(0.5));
         boostButton.whileTrue(new PrecisionCommand(0.95));
         // GripperUp.onTrue(new InstantCommand(()-> arm.manualGripperUpOrDown(2)));

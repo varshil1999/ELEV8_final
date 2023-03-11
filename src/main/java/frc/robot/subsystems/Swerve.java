@@ -151,11 +151,11 @@ public class Swerve extends SubsystemBase {
         }
         SmartDashboard.putNumber("tiltangle", getTilt().getDegrees());
 
-        if(RobotContainer.speed >= 0.65)
+        if(RobotContainer.speed >= 0.85)
         {SmartDashboard.putBoolean("Boost", true);
         SmartDashboard.putBoolean("Precision", false);}
   
-        else if(RobotContainer.speed <= 0.33)
+        else if(RobotContainer.speed <= 0.55)
         {SmartDashboard.putBoolean("Boost",false);
         SmartDashboard.putBoolean("Precision", true);}
 
