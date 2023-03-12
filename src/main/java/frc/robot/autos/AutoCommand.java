@@ -25,7 +25,7 @@ public class AutoCommand extends SequentialCommandGroup {
     Intake intake = new Intake();
     public AutoCommand(Swerve s_Swerve) {
 
-        HashMap<String, Command> eventMap = new HashMap<>();
+        HashMap<String, Command> eventMap = new HashMap<>(); //hola
         
         List<PathPlannerTrajectory> pathgroup1 = PathPlanner.loadPathGroup("5meter straight", new PathConstraints(1, 1));
 
