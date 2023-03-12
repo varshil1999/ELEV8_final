@@ -28,8 +28,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class exampleAuto extends SequentialCommandGroup {
-    public exampleAuto(Swerve s_Swerve) {
+public class AutoExample extends SequentialCommandGroup {
+    public AutoExample(Swerve s_Swerve) {
 
         PathPlannerTrajectory examplePath = PathPlanner.loadPath("testt", new PathConstraints(2, 2));
 

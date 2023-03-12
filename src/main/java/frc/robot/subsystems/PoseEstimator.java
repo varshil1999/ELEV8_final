@@ -48,7 +48,7 @@
 //     new Pose3d(Units.feetToMeters(54.0), Units.feetToMeters(13.5), Units.inchesToMeters(6.0), new Rotation3d(0.0, 0.0, Units.degreesToRadians(180.0))),
 //     new Pose3d(Units.feetToMeters(0.0), Units.feetToMeters(13.5), Units.inchesToMeters(6.0), new Rotation3d(0.0, 0.0, 0.0))));
 
-//   // Kalman Filter Configuration. These can be "tuned-to-taste" based on how much you trust your various sensors. 
+//   // Kalman Filter Configuration. These can be "tuned-to-taste" based on how much you trust your various sensors.
 //   // Smaller numbers will cause the filter to "trust" the estimate from that particular component more than the others. 
 //   // This in turn means the particualr component will have a stronger influence on the final pose estimate.
 //   private final Matrix<N3, N1> stateStdDevs = VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(5));

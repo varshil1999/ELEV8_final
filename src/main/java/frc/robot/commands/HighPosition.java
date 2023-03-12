@@ -10,16 +10,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.InputMode;
+import frc.robot.subsystems.ElementSelector;
 
 public class HighPosition extends CommandBase {
   private Intake intake;
-  private InputMode mode;
+  private ElementSelector mode;
   private Arm arm;
   
 
   /** Creates a new HighPosition. */
-  public HighPosition(Intake intake, InputMode mode,Arm arm) {
+  public HighPosition(Intake intake, ElementSelector mode,Arm arm) {
     this.intake = intake;
     this.mode = mode;
     this.arm=arm;

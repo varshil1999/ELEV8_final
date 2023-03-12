@@ -10,17 +10,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Gripper;
-import frc.robot.subsystems.InputMode;;
+import frc.robot.subsystems.ElementSelector;;
 
 public class DropGamePieces extends CommandBase {
   private Intake intake;
-  private InputMode mode;
+  private ElementSelector mode;
   private double timer, lasttimestamp = 0;
   private Gripper grip;
   private Arm arm;
   private boolean returnflag;
   /** Creates a new MediumPosition. */
-  public DropGamePieces(Intake intake, InputMode mode,Arm arm,Gripper grip) {
+  public DropGamePieces(Intake intake, ElementSelector mode,Arm arm,Gripper grip) {
     this.intake = intake;
     this.mode = mode;
     this.grip=grip;
@@ -42,6 +42,7 @@ public class DropGamePieces extends CommandBase {
   public void execute() {
     if(this.mode.Mode==true){
       this.intake.DriverCubeSpeed();
+
       SmartDashboard.putString("OutputPower", "Cube Speed");
       // this.lasttimestamp = (Timer.getFPGATimestamp() - this.timer);
     }
@@ -61,8 +62,7 @@ public class DropGamePieces extends CommandBase {
       // this.intake.OuttakeCube(0);
       this.grip.IsGrip(false);
       this.grip.Grip();
-      this.intake.OperatorCubeDegrees(30);
-      this.intake.DriverCubeDegrees();
+      
       returnflag=true;
 } 
   }
@@ -76,7 +76,8 @@ public class DropGamePieces extends CommandBase {
   public boolean isFinished() {
     if(this.mode.Mode==true){
     if (this.lasttimestamp > 1){
-    Timer.delay(0.5);
+    // Timer.delay(0.5);
+
     this.intake.OuttakeCube(0);
     this.intake.OperatorCubeDegrees(30);
     this.intake.DriverCubeDegrees();
@@ -87,6 +88,8 @@ public class DropGamePieces extends CommandBase {
   }
   }
   else if(this.mode.Mode == false){ 
+    this.intake.OperatorCubeDegrees(30);
+      this.intake.DriverCubeDegrees();
     return returnflag;
   }
   else{

@@ -7,7 +7,7 @@ package frc.robot.commands;
 
 
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.InputMode;
+import frc.robot.subsystems.ElementSelector;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -15,11 +15,11 @@ import frc.robot.subsystems.Intake;
 
 public class GroundPosition extends CommandBase {
   private Intake intake;
-  private InputMode mode;
+  private ElementSelector mode;
   private Arm arm;
 
   /** Creates a new IntakePosition. */
-  public GroundPosition(Intake intake, InputMode mode, Arm arm) {
+  public GroundPosition(Intake intake, ElementSelector mode, Arm arm) {
     this.intake = intake;
     this.mode = mode;
     this.arm = arm;

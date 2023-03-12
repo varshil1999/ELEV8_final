@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Gripper;
-import frc.robot.subsystems.InputMode;;
+import frc.robot.subsystems.ElementSelector;;
 
 public class OutputPosition extends CommandBase {
   private Intake intake;
-  private InputMode mode;
+  private ElementSelector mode;
   private Arm arm;
   private boolean  Mediumflag;
   private double Mediumcount;
@@ -22,7 +22,7 @@ public class OutputPosition extends CommandBase {
   double armpos1,elbowpos1,armpos2,elbowpos2;
   // int count=0;
   /** Creates a new MediumPosition. */
-  public OutputPosition(Intake intake, InputMode mode,Arm arm,Gripper grip) {
+  public OutputPosition(Intake intake, ElementSelector mode,Arm arm,Gripper grip) {
     this.intake = intake;
     this.mode = mode;
     this.arm=arm;
@@ -76,7 +76,7 @@ public class OutputPosition extends CommandBase {
         Mediumcount=0.28;
         
       }
-      if( this.intake.PositionIntake() >= 35 ){ 
+      if( this.intake.getIntakePosition() >= 35 ){ 
         if (Mediumflag == true && Mediumcount< 1) {
           this.arm.SetOperatorArmCancoderValues(armpos1);
           this.arm.SetOperatorELbowCancoderValues(elbowpos1);

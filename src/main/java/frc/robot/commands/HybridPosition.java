@@ -7,14 +7,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.InputMode;
+import frc.robot.subsystems.ElementSelector;
 
 public class HybridPosition extends CommandBase {
   private Intake intake;
-  private InputMode mode;
+  private ElementSelector mode;
 
   /** Creates a new HybridPosition. */
-  public HybridPosition(Intake intake, InputMode mode) {
+  public HybridPosition(Intake intake, ElementSelector mode) {
     this.intake = intake;
     this.mode = mode;
     addRequirements(intake, mode);

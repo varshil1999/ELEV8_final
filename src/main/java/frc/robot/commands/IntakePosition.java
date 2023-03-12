@@ -6,7 +6,7 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Gripper;
-import frc.robot.subsystems.InputMode;
+import frc.robot.subsystems.ElementSelector;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -16,7 +16,7 @@ import frc.robot.subsystems.Intake;
 
 public class IntakePosition extends CommandBase {
   private Intake intake;
-  private InputMode mode;
+  private ElementSelector mode;
   private boolean intakeflag, Groundflag;
   private Arm arm;
   private Gripper grip;
@@ -26,7 +26,7 @@ public class IntakePosition extends CommandBase {
   double armpos1,elbowpos1,armpos2,elbowpos2;
 
   /** Creates a new IntakePosition. */
-  public IntakePosition(Intake intake, InputMode mode, Arm arm, Gripper grip) {
+  public IntakePosition(Intake intake, ElementSelector mode, Arm arm, Gripper grip) {
     this.intake = intake;
     this.mode = mode;
     this.arm = arm;
@@ -71,7 +71,7 @@ public class IntakePosition extends CommandBase {
       if (intakeflag == true) {
         if (this.intake.detectBeamBreaker1() == false) {
           this.intake.DriverCubeDegrees();
-          if (this.intake.PositionIntake() >= 80)
+          if (this.intake.getIntakePosition() >= 80)
             this.intake.DriverCubeSpeed();
           SmartDashboard.putString("Output", "Cube Ground Position");
           SmartDashboard.putString("Check Loop","1");
@@ -194,7 +194,7 @@ public class IntakePosition extends CommandBase {
         
       if (this.intake.detectBeamBreaker1() == false&& Groundonce) {
         this.intake.DriverCubeDegrees();
-        if (this.intake.PositionIntake() >= 80 && count < 1 ) {
+        if (this.intake.getIntakePosition() >= 80 && count < 1 ) {
           // this.arm.setArmspeed(0.1);
           // this.arm.setElbowspeed(0.1);
           this.arm.GripperDegrees(50);

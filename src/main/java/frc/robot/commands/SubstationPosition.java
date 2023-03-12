@@ -1,22 +1,16 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
 
 
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.InputMode;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.ElementSelector;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-// import frc.robot.subsystems.Intake;
 
 public class SubstationPosition extends CommandBase {
   private Arm arm;
-  private InputMode mode;
+  private ElementSelector mode;
   /** Creates a new IntakePosition. */
-  public SubstationPosition(Arm arm, InputMode mode) {
+  public SubstationPosition(Arm arm, ElementSelector mode) {
     this.arm = arm;
     this.mode = mode;
     addRequirements(arm,mode);

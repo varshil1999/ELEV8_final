@@ -26,7 +26,9 @@ public class Robot extends TimedRobot {
   public static CTREConfigs ctreConfigs;
 
   private Command m_autonomousCommand;
-  private Swerve mSwerve;
+  // private Swerve mSwerve;
+  // private Arm arm = new Arm();
+  // private Intake intake = new Intake();
 
   // private PoseEstimator poseEstimator;
 
@@ -40,14 +42,14 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     ctreConfigs = new CTREConfigs();
-    mSwerve = new Swerve();
+    // mSwerve = new Swerve();
     
 
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    mSwerve.resetAnglesToAbsolute();
+    // mSwerve.resetAnglesToAbsolute();
   }
 
   /**
@@ -117,9 +119,7 @@ public class Robot extends TimedRobot {
   
     RobotContainer.arm.ResetGripper(true,false,false);
     RobotContainer.arm.HomePostion();
-    // RobotContainer.intake.ResetIntake(true,false,false);
-    
-   
+    RobotContainer.intake.ResetIntake(true,false,false);
   }
 
   /** This function is called periodically during operator control. */
@@ -132,6 +132,7 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+    RobotContainer.arm.HomePostion();
   }
 
   /** This function is called periodically during test mode. */

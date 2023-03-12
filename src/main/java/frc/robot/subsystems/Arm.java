@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 
@@ -11,23 +7,11 @@ import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
-import com.ctre.phoenix.sensors.CANCoderConfiguration;
 
-import edu.wpi.first.wpilibj.CAN;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Timer;
-
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ColorMatch;
-import com.revrobotics.ColorSensorV3;
-import com.revrobotics.EncoderType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxRelativeEncoder.Type;
@@ -53,7 +37,7 @@ public class Arm extends SubsystemBase {
   double CurrentDegrees;
 
   public static DigitalInput GripperRoatateBeamBreaker = new DigitalInput(0);
-  public static DigitalInput GripperBeamBreaker = new DigitalInput(3);
+  public static DigitalInput GripperBeamBreaker = new DigitalInput(1);
 
   public CANSparkMax Wrist = new CANSparkMax(15, MotorType.kBrushless);
 
@@ -105,13 +89,15 @@ public class Arm extends SubsystemBase {
     this.Arm.selectProfileSlot(0, 0);
     this.Arm.configMotionCruiseVelocity(10000, 30);
 		this.Arm.configMotionAcceleration(10000, 30);
+    
     this.CANCoderArm = new CANCoder(9,"Canivore");
     this.CANCoderElbow = new CANCoder(7,"Canivore");
+    
     CANCoderArm.configFactoryDefault();
     CANCoderElbow.configFactoryDefault();
 
     CANCoderArm.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
-    CANCoderElbow.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
+    CANCoderElbow.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
 
     
     Wrist.setInverted(true);
@@ -121,8 +107,8 @@ public class Arm extends SubsystemBase {
     m_encoder = Wrist.getEncoder(Type.kHallSensor,42);
     m_pidController.setP(0.5);
 
-    ArmCancoderzero = 169;
-    ElbowCancoderzero = -112.67;
+    ArmCancoderzero = 222;
+    ElbowCancoderzero = 219;
     this.Arm.setSelectedSensorPosition((ArmCancoderzero - CANCoderArm.getAbsolutePosition()) * 1706.67);
     this.Elbow.setSelectedSensorPosition((ElbowCancoderzero - CANCoderElbow.getAbsolutePosition()) * 1706.67);
     
@@ -152,6 +138,7 @@ public class Arm extends SubsystemBase {
     SmartDashboard.putNumber("Current Degrees of Intake",CurrentDegrees);
     SmartDashboard.putNumber("Arm Velocity", this.Arm.getSelectedSensorVelocity());
     SmartDashboard.putNumber("Elbow Velocity", this.Elbow.getSelectedSensorVelocity());
+    
     // SmartDashboard.putNumber("Arm Current", this.Arm.getStatorCurrent());
     // SmartDashboard.putNumber("Elbow Current", this.Elbow.getStatorCurrent());
     // SmartDashboard.putNumber("Arm Position",
@@ -199,59 +186,6 @@ public class Arm extends SubsystemBase {
     // }
     this.Arm.set(TalonFXControlMode.Position, increment);
   }
-
-  public void HomePostion() {
-    // ArmCancoderzero= 139.80;
-    // ElbowCancoderzero = 28.125;
-    SetOperatorArmCancoderValues(ArmCancoderzero);
-    SetOperatorELbowCancoderValues(ElbowCancoderzero);
-    this.Elbow.set(TalonFXControlMode.Position,  CountsFromElbowCancoder());
-    // Timer.delay(2);
-    this.Arm.set(TalonFXControlMode.Position,  CountsFromArmCancoder());
-    
-
-  }
-
-  // public void IntakePosition() {
-  //   this.Arm.set(TalonFXControlMode.Position, CountsFromArmCancoder());
-  //   this.Elbow.set(TalonFXControlMode.Position, CountsFromElbowCancoder());
-  //   this.intake.Intake.set(TalonFXControlMode.Position, 364188 * 0.998);
-  // }
-
-  // public void IntakeCOne() {
-  //   if (this.intake.Intake.getSelectedSensorPosition() >= 247000) {
-  //     this.Arm.set(TalonFXControlMode.Position, CountsFromArmCancoder());
-  //     this.Elbow.set(TalonFXControlMode.Position, CountsFromElbowCancoder(26 - 23.46));
-  //     this.intake.RightIntake.set(TalonFXControlMode.PercentOutput, 0.08);
-  //     Timer.delay(1.7);
-  //     this.Arm.set(TalonFXControlMode.Position, CountsFromArmCancoder());
-  //     this.Elbow.set(TalonFXControlMode.Position, CountsFromElbowCancoder(26 - 43.75));
-  //     this.intake.RightIntake.set(TalonFXControlMode.PercentOutput, 0);
-  //     Timer.delay(1.2);
-  //     this.Arm.set(TalonFXControlMode.Position, CountsFromArmCancoder());
-  //     this.Elbow.set(TalonFXControlMode.Position, CountsFromElbowCancoder(26 - 44.47));
-  //     Timer.delay(2);
-  //     this.Arm.set(TalonFXControlMode.Position, 0);
-  //     this.Elbow.set(TalonFXControlMode.Position, 0);
-  //   } else {
-  //     return;
-  //   }
-  // }
-
-  // public void MediumPosition() {
-  //   this.Arm.set(TalonFXControlMode.Position, CountsFromArmCancoder());
-  //   this.Elbow.set(TalonFXControlMode.Position, CountsFromElbowCancoder(26 - 36.24));
-  //   this.intake.Intake.set(TalonFXControlMode.Position, 247000);
-  //   Timer.delay(3);
-  //   this.Arm.set(TalonFXControlMode.Position, CountsFromArmCancoder());
-  //   this.Elbow.set(TalonFXControlMode.Position, CountsFromElbowCancoder(26 - 79.24));
-  // }
-
-  // public void HighPosition() {
-  //   this.Elbow.set(TalonFXControlMode.Position, CountsFromElbowCancoder(32 - 112.5));
-  //   Timer.delay(0.4);
-  //   this.Arm.set(TalonFXControlMode.Position, CountsFromArmCancoder());
-  // }
 
   public void ManualElbowUp(boolean Elbowis_up) {
     if (Elbowis_up == false)
@@ -458,7 +392,50 @@ public class Arm extends SubsystemBase {
     this.m_pidController.setReference(WristDegrees,
         CANSparkMax.ControlType.kPosition);
   }
-  
+
+  //reset gripper, arm+elbow
+
+  public void HomePostion() {
+    // ArmCancoderzero= 139.80;
+    // ElbowCancoderzero = 28.125;
+    SetOperatorArmCancoderValues(ArmCancoderzero);
+    SetOperatorELbowCancoderValues(ElbowCancoderzero);
+    this.Elbow.set(TalonFXControlMode.Position, CountsFromElbowCancoder());
+    // Timer.delay(2);
+    this.Arm.set(TalonFXControlMode.Position,  CountsFromArmCancoder());
+  }
+
+  public  void ResetGripper(boolean resetflag, boolean pointflag,boolean Start){
+    
+    while(resetflag == true) {
+    SmartDashboard.putBoolean("Can we Start Grippper",Start);
+    
+    if(GripperRotateBeamBreaked()== false) {
+      this.Wrist.set(0.05);
+     }
+
+    else if(GripperRotateBeamBreaked() == true){
+      this.Wrist.set(-0.05);
+      pointflag=true;
+      SmartDashboard.putString("output", "4");
+      
+      while (GripperRotateBeamBreaked() == false && pointflag == true) {   
+        this.Wrist.set(0);
+        m_encoder.setPosition(0);
+        GripperDegrees(-6);
+        GripperRotate();
+        Start =true;
+        SmartDashboard.putString("output", "5");
+        SmartDashboard.putBoolean("Can we Start Grippper",Start);
+        return;
+        }
+    }
+   }
+   return;
+  }
+
+
+  //boolean returns
 
   public boolean GroundType() {
     return Ground;
@@ -473,31 +450,4 @@ public class Arm extends SubsystemBase {
     GripperBB = GripperBeamBreaker.get();
     return GripperBB;
   }
-
-  public  void ResetGripper(boolean resetflag, boolean pointflag,boolean Start){
-    while(resetflag == true){
-    SmartDashboard.putBoolean("Can we Start Grippper",Start);
-    if(GripperRotateBeamBreaked()== false){
-      this.Wrist.set(0.05);
-     }
-  else if(GripperRotateBeamBreaked() == true){    
-    this.Wrist.set(-0.05);
-       pointflag=true;
-      SmartDashboard.putString("output", "4");
-        while(GripperRotateBeamBreaked() == false && pointflag == true){
-          this.Wrist.set(0);
-          m_encoder.setPosition(0);
-          GripperDegrees(-6);
-          GripperRotate();
-          Start =true;
-          SmartDashboard.putString("output", "5");
-          SmartDashboard.putBoolean("Can we Start Grippper",Start);
-          return;
-        }    
-    }
-   }
-   return;
-  }
-
-
 }

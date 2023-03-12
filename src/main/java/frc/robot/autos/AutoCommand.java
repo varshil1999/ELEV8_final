@@ -1,9 +1,10 @@
 package frc.robot.autos;
 
 import frc.robot.Constants;
-import frc.robot.autos.IntakeCube;
-import frc.robot.autos.SetIntakeAngle;
-import frc.robot.autos.ShootCube;
+import frc.robot.commands.CubePosition;
+import frc.robot.commands.IntakeCube;
+import frc.robot.commands.SetIntakeAngle;
+import frc.robot.commands.ShootCube;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Swerve;
 
@@ -13,24 +14,12 @@ import java.util.List;
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
-import com.pathplanner.lib.PathPlannerTrajectory.PathPlannerState;
 import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class AutoCommand extends SequentialCommandGroup {
     Intake intake = new Intake();
